@@ -9,20 +9,27 @@ export default function Home() {
   const [displayValue, setDisplayValue] = useState("")
 
   const handleButtonClick = () => {
-    setDisplayValue(inputValue)
+    if (inputValue === "") {
+      setDisplayValue("Vänligen ange ett tal eller uttryck.")
+    }
+    else {
+      setDisplayValue(inputValue)
+    }
+     
+
   }
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-50 p-4">
       <div className="w-full max-w-md space-y-6">
-        <h1 className="text-3xl font-bold text-center text-gray-800">
-          Kids Learning Playground
+        <h1 className="text-4xl font-bold text-center text-gray-800">
+          "avancerad" kalkylator
         </h1>
         
         <div className="space-y-4">
           <Input
             type="text"
-            placeholder="Type something here..."
+            placeholder="skriv in ett tal eller uttryck"
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             onKeyDown={(e) => {
@@ -36,14 +43,14 @@ export default function Home() {
             onClick={handleButtonClick}
             className="w-full"
           >
-            Show Result
+            Beräkna
           </Button>
         </div>
 
         {displayValue && (
           <div className="rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 p-6 text-center">
             <p className="text-2xl font-semibold text-white break-words">
-              {displayValue}
+              {displayValue} 
             </p>
           </div>
         )}
