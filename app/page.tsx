@@ -13,7 +13,11 @@ export default function Home() {
       setDisplayValue("Vänligen ange ett tal eller uttryck.")
     }
     else {
-      setDisplayValue(inputValue)
+      const tal = inputValue.split("+")
+      const tal1=Number(tal[0])
+      const tal2=Number(tal[1])
+      const svar = tal1+tal2
+      setDisplayValue(svar.toString())
     }
      
 
@@ -23,7 +27,7 @@ export default function Home() {
     <div className="flex min-h-screen items-center justify-center bg-gray-50 p-4">
       <div className="w-full max-w-md space-y-6">
         <h1 className="text-4xl font-bold text-center text-gray-800">
-          "avancerad" kalkylator
+          "avancerad" kalkylator (använder bara  plus.)
         </h1>
         
         <div className="space-y-4">
