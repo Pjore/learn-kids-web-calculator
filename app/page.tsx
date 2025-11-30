@@ -13,10 +13,39 @@ export default function Home() {
       setDisplayValue("Vänligen ange ett tal eller uttryck.")
     }
     else {
-      const tal = inputValue.split("+")
-      const tal1=Number(tal[0])
-      const tal2=Number(tal[1])
-      const svar = tal1+tal2
+      const operand = inputValue.match(/([+\-*/])/)![0] ?? ''
+      let svar = 0
+
+      switch (operand) {
+        case '+': {
+          const tal = inputValue.split(operand)
+          const tal1=Number(tal[0])
+          const tal2=Number(tal[1])
+          svar = tal1+tal2
+          break
+        }
+        case '-': {
+          const tal = inputValue.split(operand)
+          const tal1=Number(tal[0])
+          const tal2=Number(tal[1])
+          svar = tal1-tal2
+          break
+        }
+        case '*': {
+          const tal = inputValue.split(operand)
+          const tal1=Number(tal[0])
+          const tal2=Number(tal[1])
+          svar = tal1*tal2
+          break
+        }
+        case '/': {
+          const tal = inputValue.split(operand)
+          const tal1=Number(tal[0])
+          const tal2=Number(tal[1])
+          svar = tal1/tal2
+          break
+        }
+      }
       setDisplayValue(svar.toString())
     }
      
