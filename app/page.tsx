@@ -8,55 +8,57 @@ export default function Home() {
   const [inputValue, setInputValue] = useState("")
   const [displayValue, setDisplayValue] = useState("")
 
+  function DBF(tal1: number, tal2: number, operand: string): number {
+    let Svaret=0
+
+    switch (operand) {
+        case '+': {
+          Svaret = tal1+tal2
+          break
+        }
+        case '-': {
+          Svaret = tal1-tal2
+          break
+        }
+        case '*': {
+          Svaret = tal1*tal2
+          break
+        }
+        case '/': {
+          Svaret = tal1/tal2
+          break
+        }
+      }
+
+    return Svaret
+  }
+
   const handleButtonClick = () => {
     if (inputValue === "") {
       setDisplayValue("Vänligen ange ett tal eller uttryck.")
     }
     else {
-      const operand = inputValue.match(/([+\-*/])/)![0] ?? ''
+      const operander = inputValue.match(/([+\-*/])/g) || ['+']
+      let tal = inputValue.match(/\d+\.?\d*/g)?.map(Number) || []
       let svar = 0
 
-      switch (operand) {
-        case '+': {
-          const tal = inputValue.split(operand)
-          const tal1=Number(tal[0])
-          const tal2=Number(tal[1])
-          svar = tal1+tal2
-          break
-        }
-        case '-': {
-          const tal = inputValue.split(operand)
-          const tal1=Number(tal[0])
-          const tal2=Number(tal[1])
-          svar = tal1-tal2
-          break
-        }
-        case '*': {
-          const tal = inputValue.split(operand)
-          const tal1=Number(tal[0])
-          const tal2=Number(tal[1])
-          svar = tal1*tal2
-          break
-        }
-        case '/': {
-          const tal = inputValue.split(operand)
-          const tal1=Number(tal[0])
-          const tal2=Number(tal[1])
-          svar = tal1/tal2
-          break
-        }
-      }
+      svar = DBF(tal[0], tal[1], operander[0]) 
+
+      /*while (tal.length > 0) {
+
+      }*/
+      
       setDisplayValue(svar.toString())
     }
-     
-
   }
+
+  
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-50 p-4">
       <div className="w-full max-w-md space-y-6">
         <h1 className="text-4xl font-bold text-center text-gray-800">
-          "avancerad" kalkylator (använder bara  plus.)
+          "avancerad" kalkylator 
         </h1>
         
         <div className="space-y-4">
@@ -91,3 +93,4 @@ export default function Home() {
     </div>
   )
 }
+
