@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
+import { getFirstDynamicReason } from "next/dist/server/app-render/dynamic-rendering"
 
 export default function Home() {
   const [inputValue, setInputValue] = useState("")
@@ -41,12 +42,12 @@ export default function Home() {
       const operander = inputValue.match(/([+\-*/])/g) || ['+']
       let tal = inputValue.match(/\d+\.?\d*/g)?.map(Number) || []
       let svar = 0
-
-      svar = DBF(tal[0], tal[1], operander[0]) 
-
-      /*while (tal.length > 0) {
-
-      }*/
+ 
+      while (tal.length > 1) {
+        svar=DBF(tal[0], tal[1], operander[0])
+        tal.shift()
+        tal[0]=svar
+      }
       
       setDisplayValue(svar.toString())
     }
