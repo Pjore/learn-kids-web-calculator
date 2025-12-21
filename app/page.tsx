@@ -9,7 +9,7 @@ export default function Home() {
   const [inputValue, setInputValue] = useState("")
   const [displayValue, setDisplayValue] = useState("")
 
-  function DBF(tal1: number, tal2: number, operand: string): number {
+  function beräknaTvåTal(tal1: number, tal2: number, operand: string): number {
     let Svaret=0
 
     switch (operand) {
@@ -44,9 +44,10 @@ export default function Home() {
       let svar = 0
  
       while (tal.length > 1) {
-        svar=DBF(tal[0], tal[1], operander[0])
+        svar=beräknaTvåTal(tal[0], tal[1], operander[0])
         tal.shift()
         tal[0]=svar
+        operander.shift()
       }
       
       setDisplayValue(svar.toString())
